@@ -20,6 +20,7 @@ import {
   SyncAltIcon,
   WhatshotIcon,
   BarChartIcon,
+  UploadFileIcon,
 } from '6-shared/ui/Icons'
 import { Logo } from '6-shared/ui/Logo'
 import { useAppTheme } from '6-shared/ui/theme'
@@ -136,6 +137,11 @@ function Links() {
         icon={<SyncAltIcon />}
       />
       <NavigationLink text={t('stats')} path="/stats" icon={<BarChartIcon />} />
+      <NavigationLink
+        text={t('import')}
+        path="/import"
+        icon={<UploadFileIcon />}
+      />
       <NavigationLink
         text={t('yearWrapped')}
         path="/review"
