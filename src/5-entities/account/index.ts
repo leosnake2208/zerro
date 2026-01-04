@@ -1,4 +1,5 @@
 import { useAppSelector } from 'store/index'
+import type { TAccountId } from '6-shared/types'
 import {
   getAccountList,
   getAccounts,
@@ -25,6 +26,8 @@ export const accountModel = {
   useAccounts: () => useAppSelector(getAccounts),
   useDebtAccountId: () => useAppSelector(getDebtAccountId),
   usePopulatedAccounts: () => useAppSelector(getPopulatedAccounts),
+  usePopulatedAccount: (id: TAccountId) =>
+    useAppSelector(state => getPopulatedAccounts(state)[id]),
   useAccountList: () => useAppSelector(getAccountList),
   useInBudgetAccounts: () => useAppSelector(getInBudgetAccounts),
   useSavingAccounts: () => useAppSelector(getSavingAccounts),

@@ -6,6 +6,7 @@ import { TrContextMenu } from '3-widgets/global/TrContextMenu'
 import { AccountContextMenu } from '3-widgets/global/AccountContextMenu'
 import { SmartEnvTransactionsDrawer } from '3-widgets/global/EnvTransactionsDrawer'
 import { ImportDialog, AccountEditDialog } from '3-widgets/import'
+import { AccountSettingsDrawer } from '3-widgets/account/AccountSettingsDrawer'
 
 export const GlobalWidgets = () => {
   return (
@@ -19,6 +20,7 @@ export const GlobalWidgets = () => {
       <SmartTransactionPreview />
       <TrContextMenu />
       <AccountContextMenu />
+      <AccountSettingsDrawer />
 
       {/* Import widgets */}
       <ImportDialog />

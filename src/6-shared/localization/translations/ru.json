@@ -460,6 +460,57 @@
     "save": "Сохранить"
   },
 
+  "accountSettings": {
+    "title": "Настройки счёта",
+    "close": "Закрыть",
+    "tabs": {
+      "settings": "Настройки",
+      "transactions": "Операции",
+      "imports": "Импорты"
+    },
+    "sections": {
+      "basic": "Основные",
+      "budget": "Бюджет",
+      "bankImport": "Импорт выписок",
+      "sync": "Синхронизация",
+      "loanDeposit": "Параметры кредита/вклада"
+    },
+    "types": {
+      "cash": "Наличные",
+      "card": "Карта",
+      "checking": "Расчётный",
+      "loan": "Кредит",
+      "deposit": "Вклад",
+      "emoney": "Электронные деньги",
+      "debt": "Долг"
+    },
+    "fields": {
+      "title": "Название",
+      "archive": "Архивный",
+      "private": "Скрытый",
+      "inBalance": "Включить в баланс",
+      "savings": "Сберегательный",
+      "enableCorrection": "Автокоррекция баланса",
+      "swiftCode": "SWIFT код банка",
+      "swiftCodeHint": "Первые 6 символов (напр. INSJAM)",
+      "bankAccountNumber": "Номер счёта",
+      "syncedOnline": "Онлайн-синхронизация",
+      "syncedHint": "Настраивается в приложении ZenMoney",
+      "company": "Банк",
+      "startBalance": "Начальный баланс",
+      "creditLimit": "Кредитный лимит",
+      "percent": "Процент",
+      "capitalization": "Капитализация",
+      "startDate": "Дата открытия"
+    },
+    "syncBadge": {
+      "synced": "Синхронизируется",
+      "local": "Локальный"
+    },
+    "noImports": "Нет импортов для этого счёта",
+    "save": "Сохранить"
+  },
+
   "settings": {
     "settings": "Настройки",
     "language": "Язык",
