@@ -16,6 +16,7 @@ import {
   AccountBalanceWalletIcon,
   GlobeIcon,
   TagIcon,
+  UploadFileIcon,
 } from '6-shared/ui/Icons'
 import {
   Divider,
@@ -205,6 +206,12 @@ function NavItems({ onClose }: ItemProps) {
           <AccountBalanceWalletIcon />
         </ListItemIcon>
         <ListItemText>{t('accounts')}</ListItemText>
+      </MenuItem>
+      <MenuItem onClick={handleNav('/import')} component={Link} to="/import">
+        <ListItemIcon>
+          <UploadFileIcon />
+        </ListItemIcon>
+        <ListItemText>{t('import')}</ListItemText>
       </MenuItem>
       <MenuItem onClick={handleNav('/review')} component={Link} to="/review">
         <ListItemIcon>

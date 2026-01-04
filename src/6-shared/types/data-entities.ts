@@ -149,6 +149,10 @@ export type TZmAccount = {
   endDateOffsetInterval: 'day' | 'week' | 'month' | 'year' | null
   payoffStep: number | null
   payoffInterval: 'month' | 'year' | null
+  // Bank import fields
+  swiftCode: string | null // First 6 chars of SWIFT/BIC (bank + country code)
+  bankAccountNumber: string | null // Account number for import matching
+  syncedOnline: boolean // Flag for accounts synced via bank connection
 }
 
 export type TAccount = TZmAccount & {

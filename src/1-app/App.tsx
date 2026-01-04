@@ -30,6 +30,7 @@ const Donation = lazy(() => import('2-pages/Donation'))
 const Token = lazy(() => import('2-pages/Token'))
 const Stats = lazy(() => import('2-pages/Stats'))
 const Review = lazy(() => import('2-pages/Review'))
+const Import = lazy(() => import('2-pages/Import'))
 
 const history = createBrowserHistory()
 
@@ -68,6 +69,7 @@ export default function App() {
     <Route key="transactions" path="/transactions" component={Transactions} />,
     <Route key="review" path="/review" component={Review} />,
     <Route key="accounts" path="/accounts" component={Accounts} />,
+    <Route key="import" path="/import" component={Import} />,
     <Route key="budget" path="/budget" component={Budgets} />,
     <Route key="stats" path="/stats" component={Stats} />,
     <Route key="*" path="*" render={() => <Redirect to="/budget" />} />,

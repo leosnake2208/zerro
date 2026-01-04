@@ -42,5 +42,10 @@ export function makeAccount(draft: TAccountDraft): TAccount {
     endDateOffsetInterval: draft.endDateOffsetInterval || null,
     payoffStep: draft.payoffStep || null,
     payoffInterval: draft.payoffInterval || null,
+
+    // Bank import fields
+    swiftCode: draft.swiftCode || null,
+    bankAccountNumber: draft.bankAccountNumber || null,
+    syncedOnline: draft.syncedOnline || false,
   }
 }

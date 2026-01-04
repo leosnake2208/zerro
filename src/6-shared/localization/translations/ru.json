@@ -416,7 +416,48 @@
     "about": "Как пользоваться",
     "stats": "Аналитика",
     "accounts": "Счета",
+    "import": "Импорт выписок",
     "donate": "Поддержать проект"
+  },
+
+  "import": {
+    "pageTitle": "Импорт выписок",
+    "pageDescription": "Импорт банковских выписок",
+    "historyTitle": "История импортов",
+    "dialogTitle": "Импорт банковской выписки",
+    "importButton": "Импортировать выписку",
+    "dropzoneText": "Перетащите файл сюда или нажмите для выбора",
+    "supportedFormats": "Поддерживаемые форматы: CSV, XML",
+    "unsupportedFormat": "Неподдерживаемый формат файла",
+    "parseError": "Ошибка при чтении файла",
+    "importError": "Ошибка при импорте",
+    "previewTitle": "Предпросмотр",
+    "bankDetected": "Банк",
+    "transactionCount": "Операций",
+    "dateRange": "Период",
+    "accountNumber": "Номер счёта",
+    "selectAccount": "Выберите счёт",
+    "import": "Импортировать",
+    "cancel": "Отмена",
+    "done": "Готово",
+    "importSuccess": "Импортировано {{count}} операций",
+    "skippedDuplicates": "Пропущено дубликатов: {{count}}",
+    "noImports": "Нет истории импортов",
+    "unknownAccount": "Неизвестный счёт",
+    "transactionsCount": "{{count}} операций",
+    "confirmDeleteImport": "Удалить запись об импорте?",
+    "deleteImport": "Удалить"
+  },
+
+  "accountEdit": {
+    "editAccount": "Настройки счёта",
+    "swiftCode": "SWIFT код банка",
+    "swiftCodeHelp": "Первые 6 символов SWIFT/BIC (напр. INSJAM)",
+    "bankAccountNumber": "Номер счёта",
+    "bankAccountNumberHelp": "Для автоматического сопоставления при импорте",
+    "syncedOnline": "Синхронизируется онлайн",
+    "cancel": "Отмена",
+    "save": "Сохранить"
   },
 
   "settings": {
