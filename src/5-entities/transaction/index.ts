@@ -19,6 +19,7 @@ import {
   applyChangesToTransaction,
   recreateTransaction,
   bulkEditTransactions,
+  linkTransactionsAsTransfer,
 } from './thunks'
 import { TTransactionId } from '6-shared/types'
 
@@ -66,4 +67,5 @@ export const trModel = {
   applyChangesToTransaction,
   recreateTransaction,
   bulkEditTransactions,
+  linkTransactionsAsTransfer,
 }

@@ -555,10 +555,65 @@
     "transactionDeleted": "Операция удалена",
     "btnRestore": "Восстановить",
     "btnDelete": "Удалить",
+    "btnEdit": "Редактировать",
     "btnSave": "Сохранить",
+    "btnCancel": "Отмена",
     "btnClose": "Закрыть",
     "rate": "Курс: {{rate}}",
-    "fullEmptyState": "Выберите операцию,\nчтобы увидеть детали"
+    "fullEmptyState": "Выберите операцию,\nчтобы увидеть детали",
+    "originalPayee": "Оригинальное имя",
+    "originalPayeeHint": "Имя из банковской выписки"
+  },
+
+  "transactionEditor": {
+    "typeSwitch": {
+      "income": "Доход",
+      "outcome": "Расход",
+      "transfer": "Перевод",
+      "debt": "Долг"
+    },
+    "accountSelect": {
+      "incomeAccount": "Счёт зачисления",
+      "outcomeAccount": "Счёт списания"
+    },
+    "debt": {
+      "lend": "Дать в долг",
+      "getRepayment": "Получить возврат",
+      "borrow": "Взять в долг",
+      "repayDebt": "Вернуть долг",
+      "debtor": "Должник",
+      "account": "Счёт",
+      "amount": "Сумма",
+      "currentBalance": "Баланс с {{name}}",
+      "theyOweYou": "должен вам",
+      "youOweThem": "вы должны"
+    },
+    "transfer": {
+      "linkTitle": "Связать как перевод",
+      "selectTransaction": "Выберите транзакцию для связывания",
+      "noMatches": "Подходящих транзакций не найдено",
+      "exchangeRate": "Курс обмена",
+      "cancel": "Отмена",
+      "link": "Связать"
+    },
+    "advanced": {
+      "title": "Расширенные данные",
+      "originalPayee": "Оригинальное имя",
+      "merchant": "Продавец",
+      "mcc": "MCC код",
+      "status": "Статус",
+      "pending": "Ожидает",
+      "cleared": "Проведена",
+      "viewed": "Просмотрена",
+      "yes": "Да",
+      "no": "Нет",
+      "incomeBank": "Банк получателя",
+      "outcomeBank": "Банк отправителя",
+      "originalIncome": "Оригинальная сумма дохода",
+      "originalOutcome": "Оригинальная сумма расхода",
+      "reminder": "Напоминание",
+      "copied": "Скопировано!"
+    }
   },
 
   "transactionsBulkEdit": {
@@ -604,13 +659,28 @@
     "amountTo": "Сумма до",
     "dateFrom": "Дата от",
     "dateTo": "Дата до",
+    "dateRange": "Диапазон дат",
+    "amountRange": "Диапазон сумм",
     "transactionType": "Тип операции",
     "transactionType_all": "Все операции",
     "transactionType_outcome": "Расходы",
     "transactionType_transfer": "Переводы",
     "transactionType_income": "Доходы",
+    "selectAll": "Выбрать все",
+    "type_income": "Доходы",
+    "type_outcome": "Расходы",
+    "type_transfer": "Переводы",
+    "type_incomeDebt": "Погашение долга",
+    "type_outcomeDebt": "Долг",
+    "accounts": "Счета",
+    "accountType_cash": "Наличные",
+    "accountType_card": "Карты",
+    "accountType_savings": "Сбережения",
+    "currencies": "Валюты",
+    "categories": "Категории",
     "onlyNew": "Только новые",
     "showDeleted": "Показать удалённые",
+    "onlyDeleted": "Только удалённые",
     "clearFilter": "Очистить фильтры",
     "clearField": "Очистить поле",
     "extendedFilters": "Расширенные фильтры"

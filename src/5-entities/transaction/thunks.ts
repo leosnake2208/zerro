@@ -175,3 +175,85 @@ function split(raw: TTransaction) {
   ]
   return result
 }
+
+/**
+ * Links two separate transactions (one income, one outcome) into a single transfer.
+ * The source transaction determines date/payee/comment, and both are marked as deleted.
+ */
+export const linkTransactionsAsTransfer =
+  (sourceId: TTransactionId, targetId: TTransactionId): AppThunk<string> =>
+  (dispatch, getState) => {
+    sendEvent('Transaction: link as transfer')
+    const state = getState()
+    const allTransactions = getTransactionsById(state)
+    const source = allTransactions[sourceId]
+    const target = allTransactions[targetId]
+
+    if (!source || !target) {
+      throw new Error('Transaction not found')
+    }
+
+    // Determine which is income and which is outcome
+    let incomeSource: TTransaction
+    let outcomeSource: TTransaction
+
+    if (source.income > 0 && !source.outcome) {
+      // Source is income
+      incomeSource = source
+      outcomeSource = target
+    } else if (source.outcome > 0 && !source.income) {
+      // Source is outcome
+      incomeSource = target
+      outcomeSource = source
+    } else {
+      // Source is already a transfer or has both, use as income
+      incomeSource = source
+      outcomeSource = target
+    }
+
+    // Create the new combined transfer transaction
+    const newTr: TTransaction = {
+      ...incomeSource,
+      id: uuidv1(),
+      changed: Date.now(),
+      // Income side from income source
+      income: incomeSource.income,
+      incomeAccount: incomeSource.incomeAccount,
+      incomeInstrument: incomeSource.incomeInstrument,
+      incomeBankID: incomeSource.incomeBankID,
+      // Outcome side from outcome source
+      outcome: outcomeSource.outcome,
+      outcomeAccount: outcomeSource.outcomeAccount,
+      outcomeInstrument: outcomeSource.outcomeInstrument,
+      outcomeBankID: outcomeSource.outcomeBankID,
+      // Use primary source's metadata
+      date: source.date,
+      payee: source.payee || target.payee,
+      comment: source.comment || target.comment,
+      tag: null, // Transfers don't have tags
+      // Clear op amounts as they're not relevant for user-linked transfers
+      opIncome: null,
+      opIncomeInstrument: null,
+      opOutcome: null,
+      opOutcomeInstrument: null,
+    }
+
+    // Mark both original transactions as deleted
+    const deletedSource = {
+      ...source,
+      outcome: 0.00001,
+      income: 0.00001,
+      changed: Date.now(),
+    }
+    const deletedTarget = {
+      ...target,
+      outcome: 0.00001,
+      income: 0.00001,
+      changed: Date.now(),
+    }
+
+    dispatch(
+      applyClientPatch({ transaction: [deletedSource, deletedTarget, newTr] })
+    )
+    return newTr.id
+  }

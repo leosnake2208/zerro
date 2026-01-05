@@ -1,8 +1,10 @@
 import type {
   TAccountId,
   TISOMonth,
+  TISODate,
   TTagId,
   TTransaction,
+  TInstrumentId,
 } from '6-shared/types'
 import type { ValueCondition, StringCondition } from './basicFiltering'
 
@@ -19,7 +21,11 @@ type BasicConditions = {
 type AdditionalConditions = {
   search?: null | string
   type?: StringCondition<TrType>
+  /** Multiple transaction types filter */
+  types?: TrType[]
   showDeleted?: boolean
+  /** Show only deleted transactions */
+  onlyDeleted?: boolean
   isViewed?: boolean
   /**
    * Custom filtering condition for tags.
@@ -29,7 +35,14 @@ type AdditionalConditions = {
   mainTag?: StringCondition<TTagId>
   month?: StringCondition<TISOMonth>
   account?: StringCondition<TAccountId>
+  /** Multiple accounts filter */
+  accounts?: TAccountId[]
+  /** Multiple currencies filter */
+  currencies?: TInstrumentId[]
   amount?: ValueCondition
+  /** Date range filter */
+  dateFrom?: TISODate
+  dateTo?: TISODate
 }
 
 export type TrCondition = BasicConditions &
@@ -46,7 +59,8 @@ export const checkRaw =
 function checkConditions(tr: TTransaction, conditions?: TrCondition): boolean {
   // Check if transaction is deleted even if it's not specified in conditions
   // (usually we don't want deleted transactions)
-  if (!checkDeleted(tr, conditions?.showDeleted)) return false
+  if (!checkDeleted(tr, conditions?.showDeleted, conditions?.onlyDeleted))
+    return false
   // No conditions - return true
   if (!conditions) return true
   // Now check all other conditions
@@ -72,8 +86,12 @@ function checkKey(
       return checkSearch(tr, conditions[key])
     case 'type':
       return checkType(tr, conditions[key])
+    case 'types':
+      return checkTypes(tr, conditions[key])
     case 'showDeleted':
-      return checkDeleted(tr, conditions[key])
+      return checkDeleted(tr, conditions[key], conditions.onlyDeleted)
+    case 'onlyDeleted':
+      return true // Handled in checkDeleted
     case 'isViewed':
       return checkIsViewed(tr, conditions[key])
     case 'tags':
@@ -84,8 +102,16 @@ function checkKey(
       return checkMonth(tr, conditions[key])
     case 'account':
       return checkAccount(tr, conditions[key])
+    case 'accounts':
+      return checkAccounts(tr, conditions[key])
+    case 'currencies':
+      return checkCurrencies(tr, conditions[key])
     case 'amount':
       return checkAmount(tr, conditions[key])
+    case 'dateFrom':
+      return checkDateFrom(tr, conditions[key])
+    case 'dateTo':
+      return checkDateTo(tr, conditions[key])
 
     /* Handle logical operators */
     case 'or':
@@ -123,11 +149,19 @@ function checkType(tr: TTransaction, condition?: TrCondition['type']) {
   return checkValue(getType(tr), condition)
 }
 
+function checkTypes(tr: TTransaction, condition?: TrCondition['types']) {
+  if (!condition || condition.length === 0) return true
+  return condition.includes(getType(tr))
+}
+
 function checkDeleted(
   tr: TTransaction,
-  condition?: TrCondition['showDeleted']
+  showDeleted?: TrCondition['showDeleted'],
+  onlyDeleted?: TrCondition['onlyDeleted']
 ) {
-  if (isDeleted(tr)) return Boolean(condition)
+  const deleted = isDeleted(tr)
+  if (onlyDeleted) return deleted
+  if (deleted) return Boolean(showDeleted)
   return true
 }
 
@@ -174,4 +208,33 @@ function checkAmount(tr: TTransaction, condition?: TrCondition['amount']) {
   if (type === TrType.Income) return checkValue(tr.income, condition)
   if (type === TrType.Outcome) return checkValue(tr.outcome, condition)
   return checkValue(tr.income, condition) || checkValue(tr.outcome, condition)
+}
+
+function checkAccounts(tr: TTransaction, condition?: TrCondition['accounts']) {
+  if (!condition || condition.length === 0) return true
+  return (
+    condition.includes(tr.incomeAccount) ||
+    condition.includes(tr.outcomeAccount)
+  )
+}
+
+function checkCurrencies(
+  tr: TTransaction,
+  condition?: TrCondition['currencies']
+) {
+  if (!condition || condition.length === 0) return true
+  return (
+    condition.includes(tr.incomeInstrument) ||
+    condition.includes(tr.outcomeInstrument)
+  )
+}
+
+function checkDateFrom(tr: TTransaction, condition?: TrCondition['dateFrom']) {
+  if (!condition) return true
+  return tr.date >= condition
+}
+
+function checkDateTo(tr: TTransaction, condition?: TrCondition['dateTo']) {
+  if (!condition) return true
+  return tr.date <= condition
 }
