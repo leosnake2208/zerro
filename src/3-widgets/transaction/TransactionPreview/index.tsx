@@ -15,6 +15,7 @@ import {
   Zoom,
   Button,
   Stack,
+  CircularProgress,
 } from '@mui/material'
 import { DatePicker } from '@mui/x-date-pickers'
 import { Tooltip } from '6-shared/ui/Tooltip'
@@ -24,7 +25,10 @@ import {
   RestoreFromTrashIcon,
   CalendarIcon,
   EditIcon,
+  TranslateIcon,
+  UndoIcon,
 } from '6-shared/ui/Icons'
+import { translate } from '6-shared/api/lingva'
 import { AmountInput } from '6-shared/ui/AmountInput'
 import { rateToWords } from '6-shared/helpers/money'
 import { formatDate, parseDate, toISODate } from '6-shared/helpers/date'
@@ -132,6 +136,10 @@ const TransactionContent: FC<TransactionPreviewProps> = props => {
     tr.outcomeAccount
   )
   const [isEditMode, setIsEditMode] = useState(false)
+  const [isTranslating, setIsTranslating] = useState(false)
+  const [preTranslationComment, setPreTranslationComment] = useState<
+    string | null
+  >(null)
 
   useEffect(() => {
     setLocalComment(tr.comment)
@@ -230,7 +238,54 @@ const TransactionContent: FC<TransactionPreviewProps> = props => {
     setLocalIncomeAccount(tr.incomeAccount)
     setLocalOutcomeAccount(tr.outcomeAccount)
     setIsEditMode(false)
+    setPreTranslationComment(null)
   }, [tr, getTrType])
+
+  const onTranslate = useCallback(async () => {
+    setIsTranslating(true)
+    try {
+      // Save current comment for rollback
+      setPreTranslationComment(localComment)
+
+      const translations: string[] = []
+
+      // Translate payee if present
+      if (localPayee && localPayee.trim()) {
+        const payeeResult = await translate(localPayee, 'en', 'auto')
+        if (payeeResult.translation && payeeResult.translation !== localPayee) {
+          translations.push(`Payee: ${payeeResult.translation}`)
+        }
+      }
+
+      // Translate comment if present
+      if (localComment && localComment.trim()) {
+        const commentResult = await translate(localComment, 'en', 'auto')
+        if (
+          commentResult.translation &&
+          commentResult.translation !== localComment
+        ) {
+          translations.push(`Comment: ${commentResult.translation}`)
+        }
+      }
+
+      // Append translations to comment
+      if (translations.length > 0) {
+        const translationBlock = `\n\n--- Translation ---\n${translations.join('\n')}`
+        setLocalComment((localComment || '') + translationBlock)
+      }
+    } catch (error) {
+      console.error('Translation failed:', error)
+    } finally {
+      setIsTranslating(false)
+    }
+  }, [localPayee, localComment])
+
+  const onRollbackTranslation = useCallback(() => {
+    if (preTranslationComment !== null) {
+      setLocalComment(preTranslationComment)
+      setPreTranslationComment(null)
+    }
+  }, [preTranslationComment])
 
   const titles = {
     income: t('type_income'),
@@ -403,6 +458,38 @@ const TransactionContent: FC<TransactionPreviewProps> = props => {
               helperText={t('originalPayeeHint')}
               size="small"
             />
+
+            {/* Translation buttons */}
+            {(localPayee || localComment) && (
+              <Stack direction="row" spacing={1}>
+                <Button
+                  variant="outlined"
+                  size="small"
+                  startIcon={
+                    isTranslating ? (
+                      <CircularProgress size={16} />
+                    ) : (
+                      <TranslateIcon />
+                    )
+                  }
+                  onClick={onTranslate}
+                  disabled={isTranslating}
+                >
+                  {t('btnTranslate')}
+                </Button>
+                {preTranslationComment !== null && (
+                  <Button
+                    variant="outlined"
+                    size="small"
+                    color="warning"
+                    startIcon={<UndoIcon />}
+                    onClick={onRollbackTranslation}
+                  >
+                    {t('btnRollbackTranslation')}
+                  </Button>
+                )}
+              </Stack>
+            )}
           </>
         ) : (
           /* View Mode */

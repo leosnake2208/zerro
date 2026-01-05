@@ -559,6 +559,8 @@
     "btnSave": "Сохранить",
     "btnCancel": "Отмена",
     "btnClose": "Закрыть",
+    "btnTranslate": "Перевести",
+    "btnRollbackTranslation": "Откатить",
     "rate": "Курс: {{rate}}",
     "fullEmptyState": "Выберите операцию,\nчтобы увидеть детали",
     "originalPayee": "Оригинальное имя",

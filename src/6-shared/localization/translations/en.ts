@@ -580,6 +580,8 @@ export const en: typeof ru = {
     btnSave: 'Save',
     btnCancel: 'Cancel',
     btnClose: 'Close',
+    btnTranslate: 'Translate',
+    btnRollbackTranslation: 'Rollback',
     rate: 'Rate: {{rate}}',
     fullEmptyState: 'Select a transaction to see details',
     originalPayee: 'Original payee',

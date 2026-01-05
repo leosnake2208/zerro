@@ -347,3 +347,23 @@ export const UploadFileIcon = createFeatherIcon(
   </>,
   'upload'
 )
+
+export const TranslateIcon = createFeatherIcon(
+  <>
+    <path d="m5 8 6 6"></path>
+    <path d="m4 14 6-6 2-3"></path>
+    <path d="M2 5h12"></path>
+    <path d="M7 2h1"></path>
+    <path d="m22 22-5-10-5 10"></path>
+    <path d="M14 18h6"></path>
+  </>,
+  'translate'
+)
+
+export const UndoIcon = createFeatherIcon(
+  <>
+    <path d="M3 7v6h6"></path>
+    <path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"></path>
+  </>,
+  'undo'
+)
