@@ -778,4 +778,52 @@ export const en: typeof ru = {
       ' purchase_other': ' ({{count}} purchases)',
     },
   },
+
+  categoryEditor: {
+    listTitle: 'Categories',
+    addCategory: 'Add category',
+    noCategories: 'No categories yet',
+    searchPlaceholder: 'Search categories...',
+
+    editTitle: 'Edit Category',
+    createTitle: 'New Category',
+    viewTitle: 'Category',
+
+    fieldName: 'Name',
+    fieldNameError: 'Name is required',
+    fieldIcon: 'Icon',
+    fieldColor: 'Color',
+    fieldParent: 'Parent category',
+    fieldParentNone: 'None (top-level category)',
+    fieldParentDisabled: 'Cannot change — has subcategories',
+    fieldShowIncome: 'Show for income',
+    fieldShowOutcome: 'Show for expenses',
+    fieldBudgetIncome: 'Include in income budget',
+    fieldBudgetOutcome: 'Include in expense budget',
+    fieldComment: 'Comment',
+    fieldCurrency: 'Default currency',
+
+    btnEdit: 'Edit',
+    btnDelete: 'Delete',
+    btnSave: 'Save',
+    btnCreate: 'Create',
+    btnCancel: 'Cancel',
+
+    deleteConfirmTitle: 'Delete category?',
+    deleteConfirmDescription:
+      'The category will be deleted. Transactions with this category will become uncategorized.',
+    deleteConfirmOk: 'Delete',
+
+    hasChildrenError: 'Cannot delete category with subcategories',
+
+    iconPickerTitle: 'Choose icon',
+    iconPickerClear: 'Clear icon',
+    iconPickerCustom: 'Custom emoji',
+    iconPickerSearch: 'Search icons...',
+
+    subcategories_one: '{{count}} subcategory',
+    subcategories_few: '{{count}} subcategories',
+    subcategories_many: '{{count}} subcategories',
+    subcategories_other: '{{count}} subcategories',
+  },
 }

@@ -749,5 +749,52 @@
       " purchase_many": " ({{count}} покупок)",
       " purchase_other": " ({{count}} покупок)"
     }
+  },
+
+  "categoryEditor": {
+    "listTitle": "Категории",
+    "addCategory": "Добавить категорию",
+    "noCategories": "Категорий пока нет",
+    "searchPlaceholder": "Поиск категорий...",
+
+    "editTitle": "Редактирование категории",
+    "createTitle": "Новая категория",
+    "viewTitle": "Категория",
+
+    "fieldName": "Название",
+    "fieldNameError": "Название обязательно",
+    "fieldIcon": "Иконка",
+    "fieldColor": "Цвет",
+    "fieldParent": "Родительская категория",
+    "fieldParentNone": "Нет (основная категория)",
+    "fieldParentDisabled": "Нельзя изменить — есть подкатегории",
+    "fieldShowIncome": "Показывать для доходов",
+    "fieldShowOutcome": "Показывать для расходов",
+    "fieldBudgetIncome": "Учитывать в бюджете доходов",
+    "fieldBudgetOutcome": "Учитывать в бюджете расходов",
+    "fieldComment": "Комментарий",
+    "fieldCurrency": "Валюта по умолчанию",
+
+    "btnEdit": "Редактировать",
+    "btnDelete": "Удалить",
+    "btnSave": "Сохранить",
+    "btnCreate": "Создать",
+    "btnCancel": "Отмена",
+
+    "deleteConfirmTitle": "Удалить категорию?",
+    "deleteConfirmDescription": "Категория будет удалена. Операции с этой категорией останутся без категории.",
+    "deleteConfirmOk": "Удалить",
+
+    "hasChildrenError": "Нельзя удалить категорию с подкатегориями",
+
+    "iconPickerTitle": "Выберите иконку",
+    "iconPickerClear": "Убрать иконку",
+    "iconPickerCustom": "Своя эмодзи",
+    "iconPickerSearch": "Поиск иконок...",
+
+    "subcategories_one": "{{count}} подкатегория",
+    "subcategories_few": "{{count}} подкатегории",
+    "subcategories_many": "{{count}} подкатегорий",
+    "subcategories_other": "{{count}} подкатегорий"
   }
 }

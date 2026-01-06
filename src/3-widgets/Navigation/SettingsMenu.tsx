@@ -48,6 +48,8 @@ import { convertZmBudgetsToZerro } from '4-features/budget/convertZmBudgetsToZer
 import { registerPopover } from '6-shared/historyPopovers'
 import { useConfirm } from '6-shared/ui/SmartConfirm'
 import { useColorScheme } from '6-shared/ui/theme'
+import { useCategoryListDrawer } from '3-widgets/tag'
+import LocalOfferIcon from '@mui/icons-material/LocalOffer'
 
 const settingsHooks = registerPopover<{}, PopoverProps>('settingsMenu', {})
 
@@ -191,7 +193,9 @@ function LangItem({ onClose }: ItemProps) {
 
 function NavItems({ onClose }: ItemProps) {
   const { t } = useTranslation('navigation')
+  const { t: tCat } = useTranslation('categoryEditor')
   const history = useHistory()
+  const openCategories = useCategoryListDrawer()
   const handleNav =
     (path: string): React.MouseEventHandler<HTMLAnchorElement> =>
     e => {
@@ -199,6 +203,10 @@ function NavItems({ onClose }: ItemProps) {
       onClose()
       setTimeout(() => history.push(path), 10)
     }
+  const handleOpenCategories = () => {
+    onClose()
+    openCategories()
+  }
   return (
     <>
       <MenuItem onClick={handleNav('/accounts')} component={Link} to="/stats">
@@ -212,6 +220,12 @@ function NavItems({ onClose }: ItemProps) {
           <UploadFileIcon />
         </ListItemIcon>
         <ListItemText>{t('import')}</ListItemText>
+      </MenuItem>
+      <MenuItem onClick={handleOpenCategories}>
+        <ListItemIcon>
+          <LocalOfferIcon />
+        </ListItemIcon>
+        <ListItemText>{tCat('listTitle')}</ListItemText>
       </MenuItem>
       <MenuItem onClick={handleNav('/review')} component={Link} to="/review">
         <ListItemIcon>

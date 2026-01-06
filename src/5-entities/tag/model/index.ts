@@ -1,7 +1,7 @@
 import { useAppSelector } from 'store'
 import { getPopulatedTags, getTags, getTagsTree } from './model'
 import { makeTag } from './makeTag'
-import { createTag, patchTag } from './thunks'
+import { createTag, patchTag, deleteTag } from './thunks'
 
 export type { TagTreeNode } from './model'
 export type { TTagPopulated } from './populateTags'
@@ -24,4 +24,5 @@ export const tagModel = {
   // Thunks
   patchTag,
   createTag,
+  deleteTag,
 }

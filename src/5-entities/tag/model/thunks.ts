@@ -1,4 +1,10 @@
-import type { OptionalExceptFor, TTag } from '6-shared/types'
+import type {
+  OptionalExceptFor,
+  TTag,
+  TTagId,
+  TDeletionObject,
+} from '6-shared/types'
+import { DataEntity } from '6-shared/types'
 import type { AppThunk } from 'store'
 import { sendEvent } from '6-shared/helpers/tracking'
 import { applyClientPatch } from 'store/data'
@@ -42,3 +48,29 @@ export const createTag =
   }
 
 const hasId = (tag: Partial<TTag>): tag is TTagDraft => !!tag.id
+
+export const deleteTag =
+  (tagId: TTagId): AppThunk =>
+  (dispatch, getState) => {
+    const state = getState()
+    const userId = userModel.getRootUserId(state)
+    if (!userId) throw new Error('User is not defined')
+
+    const currentTag = getTags(state)[tagId]
+    if (!currentTag) throw new Error('Tag not found')
+
+    // Check for children - prevent deletion of parent tags with children
+    const allTags = getTags(state)
+    const hasChildren = Object.values(allTags).some(t => t.parent === tagId)
+    if (hasChildren) throw new Error('Cannot delete tag with children')
+
+    const del: TDeletionObject = {
+      id: tagId,
+      object: DataEntity.Tag,
+      stamp: Date.now(),
+      user: userId,
+    }
+
+    sendEvent('Tag: delete')
+    dispatch(applyClientPatch({ deletion: [del] }))
+  }
